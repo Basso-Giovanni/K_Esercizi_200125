@@ -30,7 +30,9 @@ fun main()
         }
 
         val body = response.body?.string() ?: ""
-        val moshi = Moshi.Builder().build()
+        val moshi = Moshi.Builder()
+            .add(KotlinJsonAdapterFactory()) // Aggiunta del supporto per le classi Kotlin
+            .build()
         val listType = Types.newParameterizedType(List::class.java, Todo::class.java)
         val adapter = moshi.adapter<List<Todo>>(listType)
 
